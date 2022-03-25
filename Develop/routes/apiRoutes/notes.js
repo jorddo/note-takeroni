@@ -1,30 +1,24 @@
 const router = require('express').Router();
-const { createNewNote } = require('../../lib/notes');
-const db = require('../../db/db.json');
+const { createNewNote, deleteNote } = require('../../lib/notes');
+const { notes } = require('../../db/db.json');
 
 router.get('/notes', (req, res) => {
-  let results = db;
+  let results = notes;
   res.json(results);
 });
 
 router.post('/notes', (req, res) => {
-  console.log('Hey');
-  const result = createNewNote();
-  if (result) {
-    res.json(result);
-  } else {
-    res.send(404);
-  }
+  const result = createNewNote(req.body, notes);
+
+  res.json(result);
 });
 
 router.delete('/notes/:id', (req, res) => {
-  req.body.id = animals.length.toString();
-
-  if (!validateAnimal(req.body)) {
-    res.status(400).send('The animal is not properly formatted.');
+  const result = deleteNote(req.params.id, notes);
+  if (result) {
+    res.destroy(result);
   } else {
-    const animal = createNewAnimal(req.body, animals);
-    res.json(animal);
+    res.sendStatus(404);
   }
 });
 

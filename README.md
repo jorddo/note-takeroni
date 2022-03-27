@@ -43,4 +43,6 @@ INSERT BADGES HERE WITH %
 
 ## License
 
+![https://img.shields.io/badge/license-MIT-brightgreen]
+
 - [MIT](https://opensource.org/licenses/MIT)
